@@ -1,37 +1,74 @@
-## Welcome to GitHub Pages
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-You can use the [editor on GitHub](https://github.com/MarcusK2000/PengeKlikker/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<!DOCTYPE Html>
+<head>
 
-### Markdown
+<title>Penge Klikker</title>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+</head>
+<body>
+<h1>Penge Klikker</h1>
+<img height="200px" src="https://salgsbutikken.dk/images/kob%20krone-p.jpg"</img>
+<h3 id="coins"></h3>
+<h4 id="coinsPS"></h3>
+<button onclick ="gainCoin()">Penge (1kr. pr. klik)</button>
+<button onclick ="getCoinsPS()">Køb +1 kr. pr. sekundt (50Kr)</button>
+<button onclick ="getCoinsPD()">Køb +10 kr. pr. sekundt (150Kr)</button>
 
-```markdown
-Syntax highlighted code block
+<script>
+var coins = 0;
+var coinsPS = 0;
+var coinsPC = 1;
+var coinsPD = 0;
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+function gainCoin() {
 
-**Bold** and _Italic_ and `Code` text
+  var audio = new Audio('sækmønter.mp3.mp3');
+    audio.play();
 
-[Link](url) and ![Image](src)
-```
+coins += coinsPC;
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+}
 
-### Jekyll Themes
+setInterval(function renderCoins() {
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/MarcusK2000/PengeKlikker/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+document.getElementById("coins").innerHTML = "Mønter: " + coins;
 
-### Support or Contact
+})
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+setInterval(function renderCoinsPS() {
+
+document.getElementById("coinsPS").innerHTML = "Mønter per sekundt: " + 
+coinsPS;
+
+})
+
+function getCoinsPS(){
+
+if (coins >= 50){
+coinsPS += 1;
+coins -= 50;
+
+}
+else{
+alert("Desværre. Du har ikke nok penge til at betale for dette.")
+}
+
+
+setInterval(function coinPS(){
+
+coins += coinsPS;
+
+}, 1000)
+
+}
+
+</script>
+</body>
